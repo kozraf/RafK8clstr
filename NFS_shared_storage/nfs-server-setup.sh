@@ -18,4 +18,5 @@ sudo systemctl enable nfs-kernel-server
 
 # Open necessary ports
 sudo ufw allow from 192.168.89.0/24 to any port nfs
+kubectl apply -f /home/vagrant/RafK8clstr/NFS_shared_storage/storageclass.yaml
 
