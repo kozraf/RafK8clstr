@@ -16,7 +16,7 @@ sudo chmod 777 /srv/nfs
 echo -e "--------"
 echo -e "Configure NFS exports so node2 and node3 can access it"
 #
-sudo echo '/srv/nfs/k8s_pv_jenkins 192.168.89.142(rw,sync,no_subtree_check) 192.168.89.143(rw,sync,no_subtree_check)' | sudo tee -a /etc/exports
+sudo echo '/srv/nfs/k8s 192.168.89.142(rw,sync,no_subtree_check) 192.168.89.143(rw,sync,no_subtree_check)' | sudo tee -a /etc/exports
 
 echo -e "--------"
 echo -e "Restart NFS server and enable on boot"
