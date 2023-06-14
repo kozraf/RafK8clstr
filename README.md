@@ -1,4 +1,4 @@
-# K8onJammyJellyfish-Vagrant
+# RafK8clstr
 3-node K8 cluster (contanierd CRI with "flannel" layer 3 fabric) on Ubuntu using VirtualBox and Vagrant
 
 K8 used - 1.26
