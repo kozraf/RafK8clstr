@@ -31,5 +31,17 @@ sudo ufw allow from 192.168.89.0/24 to any port nfs
 
 echo -e "--------"
 echo -e "Adding storageclass"
-#sudo kubectl apply -f /home/vagrant/RafK8clstr/NFS_shared_storage/storageclass.yaml
+
+sudo tee /home/vagrant/K8/storageclass.yaml <<EOF
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: nfs-storage
+provisioner: kubernetes.io/no-provisioner
+mountOptions:
+  - hard
+  - nfsvers=4.1
+EOF
+
+kubectl apply -f /home/vagrant/K8/storageclass.yaml
 
