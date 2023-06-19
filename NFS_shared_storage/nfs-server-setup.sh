@@ -43,5 +43,5 @@ mountOptions:
   - nfsvers=4.1
 EOF
 
-kubectl > /home/vagrant/output
+kubectl create -f /home/vagrant/K8/storageclass.yaml
 
