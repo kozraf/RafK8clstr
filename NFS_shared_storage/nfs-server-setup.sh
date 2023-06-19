@@ -43,5 +43,5 @@ mountOptions:
   - nfsvers=4.1
 EOF
 
-sudo kubectl apply -f /home/vagrant/K8/storageclass.yaml
+kubectl > /home/vagrant/output
 
