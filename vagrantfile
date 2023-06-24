@@ -58,6 +58,12 @@ Vagrant.configure("2") do |config|
    node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/Jenkins_with_TF/jenkins_install.sh"
   #node.vm.provision "shell", inline: "/home/vagrant/Jenkins_with_TF/jenkins_install.sh"
 
+# Deploy ArgoCD
+   node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/ArgoCD"
+   node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/ArgoCD/argo-cd_install.sh"
+   node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/ArgoCD/argo-cd_install.sh"
+  #node.vm.provision "shell", inline: "/home/vagrant/ArgoCD/argo-cd_install.sh"
+
   end
 
   config.vm.define "node2" do |node|
