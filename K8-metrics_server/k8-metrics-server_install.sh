@@ -26,7 +26,7 @@ while true; do
   echo -e "\e[32mAll pods are ready!\e[0m"
   break
 done
-sleep 5
+sleep 120
 kubectl top node
 
 
