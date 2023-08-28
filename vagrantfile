@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
 # Deploy K8-metrics-server
    node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
    node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
-   #node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
+   node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
 
 # NFS setup
 
@@ -47,9 +47,9 @@ Vagrant.configure("2") do |config|
    #node.vm.provision "shell", inline: "kubectl apply -f /home/vagrant/RafK8clstr/NFS_shared_storage/storageclass.yaml"
 
 # Deploy K8-dashboard
-   node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/K8-dashboard"
-   node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/K8-dashboard/k8-dashboard_install.sh"
-   node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/K8-dashboard/k8-dashboard_install.sh"
+   node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/K8-dashboard /home/vagrant/RafK8clstr/K8-dashboard"
+   node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/K8-dashboard/k8-dashboard_install.sh"
+   node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/RafK8clstr/K8-dashboard/k8-dashboard_install.sh"
   #node.vm.provision "shell", inline: "/home/vagrant/K8-dashboard/k8-dashboard_install.sh"
 
 # Deploy Jenkins-with-TF
