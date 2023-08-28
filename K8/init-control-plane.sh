@@ -33,6 +33,7 @@ echo -e "--------"
 echo -e "----Copy Kubernetes configuration files to user directory----"
 mkdir -p /home/vagrant/.kube
 sudo cp -i /etc/kubernetes/admin.conf /home/vagrant/.kube/config
+sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
 sudo chown  vagrant:vagrant /home/vagrant/.kube/config
 sudo chown -R vagrant:vagrant /home/vagrant/.kube/
 export KUBECONFIG=/home/vagrant/.kube/config
