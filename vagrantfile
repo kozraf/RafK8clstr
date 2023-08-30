@@ -16,8 +16,6 @@ Vagrant.configure("2") do |config|
   end
 
   # Install Docker and Kubernetes on each VM
-  config.vm.provision "shell", path: "general_config.sh"
-  config.vm.provision "shell", path: "K8/install-kubernetes.sh"
 
   # Initialize the Kubernetes control plane on the first node
   config.vm.define "node1" do |node|
@@ -29,17 +27,16 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "node1" do |node|
    node.vm.provision "shell", inline: "kubeadm token create --print-join-command > /vagrant/K8/join-command.sh"
-   node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/RafK8clstr"
 
+# Additional items - start
 # Install Helm
-   node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/helm/helm_install.sh"
    node.vm.provision "shell", inline: "sudo chown -R vagrant:vagrant /home/vagrant/RafK8clstr/helm"
    node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/helm/helm_install.sh"
 
 # Deploy K8-metrics-server
    node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
    node.vm.provision "shell", inline: "sudo chown -R vagrant:vagrant /home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
-   #node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
+   node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/K8-metrics_server/k8-metrics-server_install.sh"
 
 # NFS setup
 
@@ -50,19 +47,20 @@ Vagrant.configure("2") do |config|
    node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/K8-dashboard /home/vagrant/RafK8clstr/K8-dashboard"
    node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/K8-dashboard/k8-dashboard_install.sh"
    node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/RafK8clstr/K8-dashboard/k8-dashboard_install.sh"
-   #node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/K8-dashboard/k8-dashboard_install.sh"
+   node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/K8-dashboard/k8-dashboard_install.sh"
 
 # Deploy Jenkins-with-TF
    node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/Jenkins_with_TF /home/vagrant/RafK8clstr/Jenkins_with_TF"
    node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins_install.sh"
    node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins_install.sh"
-  #node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins_install.sh"
+   node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/Jenkins_with_TF/jenkins_install.sh"
 
 # Deploy ArgoCD
    node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/ArgoCD /home/vagrant/RafK8clstr/ArgoCD"
    node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/ArgoCD/argo-cd_install.sh"
    node.vm.provision "shell", inline: "sudo chown vagrant:vagrant /home/vagrant/RafK8clstr/ArgoCD/argo-cd_install.sh"
-  #node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/ArgoCD/argo-cd_install.sh"
+   node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/ArgoCD/argo-cd_install.sh"
+# Additional items - end
 
   end
 
@@ -79,3 +77,4 @@ Vagrant.configure("2") do |config|
   end
 
 end
+
