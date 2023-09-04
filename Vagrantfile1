@@ -1,0 +1,58 @@
+Vagrant.configure("2") do |config|
+  VAGRANT_EXPERIMENTAL="dependency_provisioners"
+  # Define the base box to use
+  config.vm.box = "ubuntu/jammy64"
+
+  # Create 3 Ubuntu VMs with static IPs
+  (1..3).each do |i|
+    config.vm.define "node#{i}" do |node|
+      node.vm.network "private_network", ip: "192.168.89.#{140 + i}"
+      node.vm.hostname = "node#{i}"
+      node.vm.provider "virtualbox" do |vb|
+        vb.memory = "6144"
+      end
+      node.vm.network :forwarded_port, guest: 22, host: 2223 + i
+    end
+  end
+
+  # Install Docker and Kubernetes on each VM
+  config.vm.provision "shell", path: "K8/general_config.sh"
+  config.vm.provision "shell", path: "K8/install-kubernetes.sh"
+
+  # Initialize the Kubernetes control plane on the first node
+  config.vm.define "node1" do |node|
+    config.vm.hostname = "node1.local"
+ 	node.vm.provision "shell", path: "K8/init-control-plane.sh"
+  end
+
+  # Generate a join token on the control plane node, clone github repo and install software
+
+  config.vm.define "node1" do |node|
+   node.vm.provision "shell", inline: "kubeadm token create --print-join-command > /vagrant/K8/join-command.sh"
+   node.vm.provision "shell", inline: "sudo git clone https://github.com/kozraf/RafK8clstr"
+
+# Install Helm
+   node.vm.provision "shell", inline: "sudo chmod 700 /home/vagrant/RafK8clstr/helm/helm_install.sh"
+   node.vm.provision "shell", inline: "sudo chown -R vagrant:vagrant /home/vagrant/RafK8clstr/helm"
+   node.vm.provision "shell", inline: "/home/vagrant/RafK8clstr/helm/helm_install.sh"
+
+# NFS setup
+
+   node.vm.provision "shell", path: "NFS_shared_storage/nfs-server-setup.sh"
+   node.vm.provision "shell", inline: "kubectl apply -f /home/vagrant/RafK8clstr/NFS_shared_storage/storageclass.yaml"
+
+  end
+
+  config.vm.define "node2" do |node|
+    config.vm.hostname = "node2.local"
+ 	node.vm.provision "shell", path: "K8/join-command.sh"
+ 	node.vm.provision "shell", path: "NFS_shared_storage/nfs-clients-setup.sh"
+  end
+
+  config.vm.define "node3" do |node|
+    config.vm.hostname = "node3.local"
+ 	node.vm.provision "shell", path: "K8/join-command.sh"
+ 	node.vm.provision "shell", path: "NFS_shared_storage/nfs-clients-setup.sh"
+  end
+
+end
