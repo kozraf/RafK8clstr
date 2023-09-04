@@ -56,13 +56,7 @@ if "!choice!"=="0" (
 )
 
 if "!choice!"=="7" (
-    REM Here you would insert the commands to actually perform the provisioning based on the selected options
-    REM For example:
-    REM if "!basicK8!"=="1" (
-    REM     REM Perform basic K8 provisioning
-    REM )
-    REM ...
-	
+
 	if "!basicK8!"=="1" (
 	echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile1 Vagrantfile
