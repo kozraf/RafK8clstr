@@ -19,7 +19,7 @@ It contains a "wrapper" (setup.bat file) which handles vagrant and allows deploy
 <a href="https://helm.sh/" title="helm"><img src="icons/helm.png" /></a>
 <a href="https://www.jenkins.io/" title="helm"><img src="icons/jenkins.png" /></a>
 <a href="https://kubernetes.io/" title="kubernetes"><img src="icons/k8.png" /></a>
-<a href="https://ww.terraform.io/" title="terraform"><img src="icons/terraform.png" /></a>
+<a href="https://www.terraform.io/" title="terraform"><img src="icons/terraform.png" /></a>
 <a href="https://www.vagrantup.com/" title="vagrantup"><img src="icons/vagrant.png" /></a>
 <a href="https://www.virtualbox.org/" title="vagrantup"><img src="icons/virtualbox.png" /></a>
 
