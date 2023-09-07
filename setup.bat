@@ -8,7 +8,7 @@ set k8Dashboard=0
 set jenkins=0
 set argoCD=0
 set destroy=0
-
+set suspend=0
 cls
 
 :menu
@@ -19,7 +19,8 @@ echo [!k8Metrics!] 2. k8-metrics-server
 echo [!k8Dashboard!] 3. K8-dashboard
 echo [!jenkins!] 4. Jenkins_with_TF
 echo [!argoCD!] 5. ArgoCD
-echo [!destroy!] 0. Destroy all VMs
+echo [!suspend!] 6. --Suspend VM's---
+echo [!destroy!] 0. ---Destroy all VMs---
 echo 7. Continue with provisioning
 echo 8. Exit
 
@@ -47,6 +48,11 @@ if "!choice!"=="4" (
 
 if "!choice!"=="5" (
     set ArgoCD=1
+    goto menu
+)
+
+if "!choice!"=="6" (
+    set suspend=1
     goto menu
 )
 
@@ -102,6 +108,15 @@ if "!choice!"=="7" (
 	echo ArgoCD_with_TF has been installed!
 	)
 
+	if "!suspend!"=="1" (
+
+	echo Suspending VMs...
+    copy /y Vagrantfile1 Vagrantfile
+    echo Running 'vagrant suspend'...
+    vagrant suspend
+	echo VMs have been suspended
+	)
+
 	if "!destroy!"=="1" (
     
     echo Copying Vagrantfile1 to Vagrantfile...
@@ -114,6 +129,7 @@ if "!choice!"=="7" (
     set jenkins=0
     set argoCD=0
     set all=0
+    set suspend=0
     set destroy=0
 	echo K8 3-node cluster has been destroyed!
 	)
@@ -125,6 +141,7 @@ if "!choice!"=="7" (
     set jenkins=0
     set argoCD=0
     set all=0
+    set suspend=0
     set destroy=0
 	exit
 	goto :eof
@@ -137,6 +154,7 @@ if "!choice!"=="7" (
     set jenkins=0
     set argoCD=0
     set all=0
+    set suspend=0
     set destroy=0
    
 )
@@ -148,6 +166,7 @@ if "!choice!"=="8" (
     set jenkins=0
     set argoCD=0
     set all=0
+    set suspend=0
     set destroy=0
 	exit
 )
