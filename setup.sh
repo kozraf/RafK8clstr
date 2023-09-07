@@ -7,6 +7,7 @@ k8Dashboard=0
 jenkins=0
 argoCD=0
 destroy=0
+suspend=0
 
 # Function to display menu
 display_menu() {
@@ -17,6 +18,7 @@ display_menu() {
   echo "[$k8Dashboard] 3. K8-dashboard"
   echo "[$jenkins] 4. Jenkins_with_TF"
   echo "[$argoCD] 5. ArgoCD"
+  echo "[$suspend] 6. Suspend all VMs"
   echo "[$destroy] 0. Destroy all VMs"
   echo "7. Continue with provisioning"
   echo "8. Exit"
@@ -33,6 +35,7 @@ while true; do
     3) k8Dashboard=$((1 - $k8Dashboard));;
     4) jenkins=$((1 - $jenkins));;
     5) argoCD=$((1 - $argoCD));;
+    6) suspend=$((1 - $suspend));;
     0) destroy=$((1 - $destroy));;
     7) 
       echo "Continuing with provisioning..."
@@ -82,6 +85,15 @@ if [ "argoCD" -eq 1 ]; then
 	echo "ArgoCD has been installed!"
 fi
 
+if [ "suspend" -eq 1 ]; then
+  echo "Suspend all VM's..."
+  cp Vagrantfile2 Vagrantfile
+  echo Running "'vagrant suspend'..."
+  vagrant suspend
+	suspend=0
+	echo "ArgoCD has been installed!"
+fi
+
 if [ "destroy" -eq 1 ]; then
   echo "Destroying!!!"
   cp Vagrantfile1 Vagrantfile
@@ -92,6 +104,7 @@ if [ "destroy" -eq 1 ]; then
   k8Dashboard=0
   jenkins=0
   argoCD=0
+  suspend=0
   destroy=0
 	echo "All VMs have been removed"
 fi
