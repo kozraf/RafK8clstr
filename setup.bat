@@ -13,7 +13,7 @@ cls
 
 :menu
 cls
-echo Please select which scripts to uncomment:
+echo Please select which option you would like to select:
 echo [!basicK8!] 1. Basic K8
 echo [!k8Metrics!] 2. k8-metrics-server
 echo [!k8Dashboard!] 3. K8-dashboard
