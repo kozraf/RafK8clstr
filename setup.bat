@@ -17,12 +17,15 @@ cls
 :menu
 cls
 echo Please select which option you would like to select:
+echo ---------------------------------------------------------------------------------
 echo [!basicK8!] 1. Basic K8
 echo [!k8Metrics!] 2. k8-metrics-server
 echo [!k8Dashboard!] 3. K8-dashboard
 echo [!jenkins!] 4. Jenkins_with_TF
 echo [!argoCD!] 5. ArgoCD
-echo [!all!] 6. Select all above
+echo [!all!] 6. Basic K8 + K8-metrics-server + K8-dashboard + Jenkins_with_TF + ArgoCD
+echo ---------------------------------------------------------------------------------
+echo Now choose from below to continue:
 echo [!suspend!] 7. --Suspend VM's---
 echo [!resume!] 8. --Resume VM's---
 echo [!destroy!] 0. ---Destroy all VMs---
