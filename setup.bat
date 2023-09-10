@@ -16,8 +16,9 @@ cls
 
 :menu
 cls
-echo Please select which option you would like to select:
+echo RafK8clstr DEPLOYMENT MENU
 echo ---------------------------------------------------------------------------------
+echo Choose if you would like to deploy only K8 3-node cluster (1) and/or add additional tools and press Enter:
 echo [!basicK8!] 1. Basic K8
 echo [!k8Metrics!] 2. k8-metrics-server
 echo [!k8Dashboard!] 3. K8-dashboard
@@ -25,11 +26,11 @@ echo [!jenkins!] 4. Jenkins_with_TF
 echo [!argoCD!] 5. ArgoCD
 echo [!all!] 6. Basic K8 + K8-metrics-server + K8-dashboard + Jenkins_with_TF + ArgoCD
 echo ---------------------------------------------------------------------------------
-echo Now choose from below to continue:
+echo Now choose from below and then choose C to continue or Q to quit:
 echo [!suspend!] 7. --Suspend VM's---
 echo [!resume!] 8. --Resume VM's---
 echo [!destroy!] 0. ---Destroy all VMs---
-echo c. Continue with provisioning
+echo c. Continue with selected options
 echo q. Quit
 
 set /p choice=Enter your choice: 
@@ -134,9 +135,8 @@ if "!choice!"=="c" (
     echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile2 Vagrantfile
     echo Installing all options
-    vagrant provision node1 --provision-with K8-metrics-server_perms,K8-metrics-server_ownership,K8-metrics-server_install,K8-dashboard_git-clone,K8-dashboard_perms,K8-dashboard_ownership,K8-dashboard_install
-    vagrant provision node1 --provision-with Jenkins-with-TF_git-clone,Jenkins-with-TF_perms,Jenkins-with-TF_ownership,Jenkins-with-TF_install, ArgoCD_git-clone,ArgoCD_perms,ArgoCD_ownership,ArgoCD_install --color
-	echo k8-metrics-server, K8-dashboard, Jenkins_with_TF and ArgoCD_with_TF has been installed!
+    vagrant provision node1 --provision-with K8-metrics-server_perms,K8-metrics-server_ownership,K8-metrics-server_install,K8-dashboard_git-clone,K8-dashboard_perms,K8-dashboard_ownership,K8-dashboard_install,Jenkins-with-TF_git-clone,Jenkins-with-TF_perms,Jenkins-with-TF_ownership,Jenkins-with-TF_install,ArgoCD_git-clone,ArgoCD_perms,ArgoCD_ownership,ArgoCD_install --color
+    echo K8 cluster with K8-metrics-server, K8-dashboard, Jenkins_with_TF and ArgoCD_with_TF has been installed!
 	)
 
 	if "!suspend!"=="1" (
