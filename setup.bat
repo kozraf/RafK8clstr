@@ -9,6 +9,9 @@ set jenkins=0
 set argoCD=0
 set destroy=0
 set suspend=0
+set all=0
+set resume=0
+
 cls
 
 :menu
@@ -19,10 +22,12 @@ echo [!k8Metrics!] 2. k8-metrics-server
 echo [!k8Dashboard!] 3. K8-dashboard
 echo [!jenkins!] 4. Jenkins_with_TF
 echo [!argoCD!] 5. ArgoCD
-echo [!suspend!] 6. --Suspend VM's---
+echo [!all!] 6. Select all above
+echo [!suspend!] 7. --Suspend VM's---
+echo [!resume!] 8. --Resume VM's---
 echo [!destroy!] 0. ---Destroy all VMs---
 echo 7. Continue with provisioning
-echo 8. Exit
+echo q. Quit
 
 set /p choice=Enter your choice: 
 
@@ -52,7 +57,17 @@ if "!choice!"=="5" (
 )
 
 if "!choice!"=="6" (
+    set all=1
+    goto menu
+)
+
+if "!choice!"=="7" (
     set suspend=1
+    goto menu
+)
+
+if "!choice!"=="8" (
+    set resume=1
     goto menu
 )
 
@@ -61,7 +76,7 @@ if "!choice!"=="0" (
     goto menu
 )
 
-if "!choice!"=="7" (
+if "!choice!"=="c" (
 
 	if "!basicK8!"=="1" (
 	echo Copying Vagrantfile1 to Vagrantfile...
@@ -108,6 +123,19 @@ if "!choice!"=="7" (
 	echo ArgoCD_with_TF has been installed!
 	)
 
+	if "!all!"=="1" (
+
+    echo Copying Vagrantfile1 to Vagrantfile...
+    copy /y Vagrantfile1 Vagrantfile
+	vagrant up --color
+    echo Copying Vagrantfile1 to Vagrantfile...
+    copy /y Vagrantfile2 Vagrantfile
+    echo Installing all options
+    vagrant provision node1 --provision-with K8-metrics-server_perms,K8-metrics-server_ownership,K8-metrics-server_install,K8-dashboard_git-clone,K8-dashboard_perms,K8-dashboard_ownership,K8-dashboard_install
+    vagrant provision node1 --provision-with Jenkins-with-TF_git-clone,Jenkins-with-TF_perms,Jenkins-with-TF_ownership,Jenkins-with-TF_install, ArgoCD_git-clone,ArgoCD_perms,ArgoCD_ownership,ArgoCD_install --color
+	echo k8-metrics-server, K8-dashboard, Jenkins_with_TF and ArgoCD_with_TF has been installed!
+	)
+
 	if "!suspend!"=="1" (
 
 	echo Suspending VMs...
@@ -115,6 +143,15 @@ if "!choice!"=="7" (
     echo Running 'vagrant suspend'...
     vagrant suspend
 	echo VMs have been suspended
+	)
+
+	if "!resume!"=="1" (
+
+	echo Resuming VMs...
+    copy /y Vagrantfile1 Vagrantfile
+    echo Running 'vagrant resume'...
+    vagrant resume
+	echo VMs have been resumed
 	)
 
 	if "!destroy!"=="1" (
@@ -129,18 +166,20 @@ if "!choice!"=="7" (
     set jenkins=0
     set argoCD=0
     set all=0
+    set resume=0
     set suspend=0
     set destroy=0
 	echo K8 3-node cluster has been destroyed!
 	)
 	
-	if "!choice!"=="8" (
+	if "!choice!"=="q" (
     set basicK8=0
     set k8Metrics=0
     set k8Dashboard=0
     set jenkins=0
     set argoCD=0
     set all=0
+    set resume=0
     set suspend=0
     set destroy=0
 	exit
@@ -154,12 +193,13 @@ if "!choice!"=="7" (
     set jenkins=0
     set argoCD=0
     set all=0
+    set resume=0
     set suspend=0
     set destroy=0
    
 )
 
-if "!choice!"=="8" (
+if "!choice!"=="q" (
     set basicK8=0
     set k8Metrics=0
     set k8Dashboard=0
