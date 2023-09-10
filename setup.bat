@@ -26,7 +26,7 @@ echo [!all!] 6. Select all above
 echo [!suspend!] 7. --Suspend VM's---
 echo [!resume!] 8. --Resume VM's---
 echo [!destroy!] 0. ---Destroy all VMs---
-echo 7. Continue with provisioning
+echo c. Continue with provisioning
 echo q. Quit
 
 set /p choice=Enter your choice: 
