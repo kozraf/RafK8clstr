@@ -33,7 +33,7 @@ echo [!destroy!] 0. ---Destroy all VMs---
 echo c. Continue with selected options
 echo q. Quit
 
-set /p choice=Enter your choice: 
+set /p choice=Enter your choice:
 
 if "!choice!"=="1" (
     set basicK8=1
@@ -88,47 +88,42 @@ if "!choice!"=="c" (
     echo Running 'vagrant up --color'...
     vagrant up --color
 	set basicK8=0
-	copy /y Vagrantfile1 Vagrantfile
 	echo K8 3-node cluster has been installed!
 	)
 
 	if "!k8Metrics!"=="1" (
-    
+
 	echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile2 Vagrantfile
     echo Running 'vagrant provision node1 --provision-with K8-metrics-server_perms,K8-metrics-server_ownership,K8-metrics-server_install --color'...
     vagrant provision node1 --provision-with K8-metrics-server_perms,K8-metrics-server_ownership,K8-metrics-server_install --color
-	copy /y Vagrantfile1 Vagrantfile
 	echo k8-metrics-server has been installed!
 	)
 
 	if "!k8Dashboard!"=="1" (
-    
+
 	echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile2 Vagrantfile
     echo Running 'vagrant provision node1 --provision-with K8-dashboard_git-clone,K8-dashboard_perms,K8-dashboard_ownership,K8-dashboard_install --color'...
     vagrant provision node1 --provision-with K8-dashboard_git-clone,K8-dashboard_perms,K8-dashboard_ownership,K8-dashboard_install --color
-	copy /y Vagrantfile1 Vagrantfile
 	echo K8-dashboard has been installed!
 	)
-	
+
 	if "!jenkins!"=="1" (
-    
+
 	echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile2 Vagrantfile
     echo Running 'vagrant provision node1 --provision-with Jenkins-with-TF_git-clone,Jenkins-with-TF_perms,Jenkins-with-TF_ownership,Jenkins-with-TF_install --color'...
     vagrant provision node1 --provision-with Jenkins-with-TF_git-clone,Jenkins-with-TF_perms,Jenkins-with-TF_ownership,Jenkins-with-TF_install --color
-	copy /y Vagrantfile1 Vagrantfile
 	echo Jenkins_with_TF has been installed!
 	)
-	
+
 	if "!argoCD!"=="1" (
-    
+
 	echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile2 Vagrantfile
     echo Running 'vagrant provision node1 --provision-with ArgoCD_git-clone,ArgoCD_perms,ArgoCD_ownership,ArgoCD_install --color'...
     vagrant provision node1 --provision-with ArgoCD_git-clone,ArgoCD_perms,ArgoCD_ownership,ArgoCD_install --color
-    copy /y Vagrantfile1 Vagrantfile
 	echo ArgoCD_with_TF has been installed!
 	)
 
@@ -164,7 +159,7 @@ if "!choice!"=="c" (
 	)
 
 	if "!destroy!"=="1" (
-    
+
     echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile1 Vagrantfile
     echo Running 'vagrant destroy -f'...
@@ -180,7 +175,7 @@ if "!choice!"=="c" (
     set destroy=0
 	echo K8 3-node cluster has been destroyed!
 	)
-	
+
 	if "!choice!"=="q" (
     set basicK8=0
     set k8Metrics=0
@@ -194,7 +189,7 @@ if "!choice!"=="c" (
 	exit
 	goto :eof
 	)
-	
+
 	REM Reset variables
     set basicK8=0
     set k8Metrics=0
@@ -205,7 +200,7 @@ if "!choice!"=="c" (
     set resume=0
     set suspend=0
     set destroy=0
-   
+
 )
 
 if "!choice!"=="q" (
