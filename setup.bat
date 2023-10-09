@@ -139,7 +139,7 @@ if "!choice!"=="c" (
 	echo Copying Vagrantfile1 to Vagrantfile...
     copy /y Vagrantfile2 Vagrantfile
     echo Running 'vagrant provision node1 --provision-with GrafanaPrometheus_git-clone,GrafanaPrometheus_perms,GrafanaPrometheus_ownership,GrafanaPrometheus_install --color'...
-    vagrant provision node1 --provision-with GrafanaPrometheus-clone,GrafanaPrometheus_perms,GrafanaPrometheus_ownership,GrafanaPrometheus_install --color
+    vagrant provision node1 --provision-with GrafanaPrometheus_git-clone,GrafanaPrometheus_perms,GrafanaPrometheus_ownership,GrafanaPrometheus_install --color
 	echo GrafanaPrometheus has been installed!
 	)
 
