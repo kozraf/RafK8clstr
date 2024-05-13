@@ -23,8 +23,6 @@ It contains a "wrapper" (setup.bat file) which handles vagrant and allows deploy
 <a href="https://www.vagrantup.com/" title="vagrantup"><img src="icons/vagrant.png" /></a>
 <a href="https://www.virtualbox.org/" title="vagrantup"><img src="icons/virtualbox.png" /></a>
 
-Please note that currently K8 version used is 1.26.
-
 ## Prerequisites
 
 - HashiCorp Vagrant (tested on 2.3.2 - 2.3.4)
@@ -59,6 +57,11 @@ I highly recommend to install at least K8 metrics and K8 dashboard. Other tools 
 ## Notes
 - when installing additional tools with setup.bat - corresponding repos are pulled from my https://github.com/kozraf account
 - Helm is installed when basicv K8 cluster is deployed as it is used for other tools
+
+## Version
+
+1.1 (current) K8 updated to 1.27.8
+1.0  K8 1.26
 
 ## Contributing
 
