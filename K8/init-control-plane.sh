@@ -11,7 +11,7 @@ sudo tee /home/vagrant/K8/config.yaml <<EOF
 ---
 apiVersion: kubeadm.k8s.io/v1beta3
 kind: ClusterConfiguration
-kubernetesVersion: v1.26.0
+kubernetesVersion: v1.28.7
 apiServer:
   certSANs:
   - 192.168.89.141
